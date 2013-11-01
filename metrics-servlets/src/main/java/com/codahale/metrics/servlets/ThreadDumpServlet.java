@@ -3,7 +3,6 @@ package com.codahale.metrics.servlets;
 import com.codahale.metrics.jvm.ThreadDump;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -13,9 +12,8 @@ import java.lang.management.ManagementFactory;
 /**
  * An HTTP servlets which outputs a {@code text/plain} dump of all threads in
  * the VM. Only responds to {@code GET} requests.
- */
-public class ThreadDumpServlet extends HttpServlet {
-
+*/
+public class ThreadDumpServlet extends AppDiagnosticBaseServlet {
     private static final long serialVersionUID = -2690343532336103046L;
     private static final String CONTENT_TYPE = "text/plain";
 
@@ -25,7 +23,7 @@ public class ThreadDumpServlet extends HttpServlet {
     public void init() throws ServletException {
         try {
             // Some PaaS like Google App Engine blacklist java.lang.managament
-            this.threadDump = new ThreadDump(ManagementFactory.getThreadMXBean());
+        this.threadDump = new ThreadDump(ManagementFactory.getThreadMXBean());
         } catch (NoClassDefFoundError ncdfe) {
             this.threadDump = null; // we won't be able to provide thread dump
         }
@@ -33,7 +31,7 @@ public class ThreadDumpServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req,
-            HttpServletResponse resp) throws ServletException, IOException {
+                         HttpServletResponse resp) throws ServletException, IOException {
         resp.setStatus(HttpServletResponse.SC_OK);
         resp.setContentType(CONTENT_TYPE);
         resp.setHeader("Cache-Control", "must-revalidate,no-cache,no-store");
@@ -47,5 +45,20 @@ public class ThreadDumpServlet extends HttpServlet {
         } finally {
             output.close();
         }
+    }
+
+    @Override
+    public String uri() {
+        return "/threads";
+    }
+
+    @Override
+    public String displayName() {
+        return "Threads";
+    }
+
+    @Override
+    public boolean supportsPrettyPrint() {
+        return false;
     }
 }

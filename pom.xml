@@ -7,7 +7,7 @@
 
     <groupId>io.dropwizard.metrics</groupId>
     <artifactId>metrics-parent</artifactId>
-    <version>3.1.0</version>
+    <version>3.1.0-WS</version>
     <packaging>pom</packaging>
     <name>Metrics Parent</name>
     <description>
@@ -99,12 +99,12 @@
     </distributionManagement>
 
     <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
         </dependencies>
     </dependencyManagement>
 
