@@ -15,12 +15,13 @@ public class DefaultAdminServletContextListenerTest {
         DefaultAdminServletContextListener listener = getDefaultAdminServletContextListener();
         List<? extends AppDiagnosticBaseServlet> actual = listener.diagnostics();
 
-        assertThat(actual).hasSize(5);
+        assertThat(actual).hasSize(6);
         assertThat(actual.get(0)).isInstanceOf(MetricsServlet.class);
         assertThat(actual.get(1)).isInstanceOf(PingServlet.class);
         assertThat(actual.get(2)).isInstanceOf(ThreadDumpServlet.class);
         assertThat(actual.get(3)).isInstanceOf(HealthCheckServlet.class);
         assertThat(actual.get(4)).isInstanceOf(VersionServlet.class);
+        assertThat(actual.get(5)).isInstanceOf(ServerStartTimeServlet.class);
     }
 
     private DefaultAdminServletContextListener getDefaultAdminServletContextListener() {

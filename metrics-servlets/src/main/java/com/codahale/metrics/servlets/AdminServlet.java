@@ -15,7 +15,7 @@ public class AdminServlet extends HttpServlet {
     private static final String CONTENT_TYPE = "text/html";
     private static final long serialVersionUID = -2850794040708785318L;
 
-    private transient AdminPage.Builder builder;// = new AdminPage.Builder();
+    private transient AdminPage.Builder builder;
     private transient AdminPage adminPage;
     private transient Map<String, AppDiagnosticBaseServlet> mapping;
 

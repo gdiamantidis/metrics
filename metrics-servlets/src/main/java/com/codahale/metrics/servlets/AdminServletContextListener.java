@@ -1,6 +1,7 @@
 package com.codahale.metrics.servlets;
 
 import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.common.RealClock;
 import com.codahale.metrics.health.HealthCheckRegistry;
 
 import javax.servlet.ServletContext;
@@ -46,6 +47,7 @@ public abstract class AdminServletContextListener implements ServletContextListe
         context.setAttribute(HealthCheckServlet.HEALTH_CHECK_EXECUTOR, getExecutorService());
         context.setAttribute(MetricsServlet.METRICS_REGISTRY, getMetricRegistry());
         context.setAttribute(AppDiagnosticBaseServlet.SERVLETS_REGISTRY, diagnostics());
+        context.setAttribute(RealClock.CLOCK, new RealClock());
     }
 
     @Override
